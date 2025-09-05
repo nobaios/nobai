@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOB-AI OS - Investment Ready Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 30%, #16213e 70%, #533483 100%);
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .slide-container {
+            display: none;
+            min-height: 100vh;
+            padding: 40px;
+            position: relative;
+        }
+
+        .slide-container.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7b73d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(78, 205, 196, 0.3);
+        }
+
+        h2 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.6rem;
+            color: #b8b8b8;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .tagline {
+            font-size: 2rem;
+            color: #4ecdc4;
+            margin-bottom: 50px;
+            font-weight: 500;
+            text-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .logo {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 30px;
+            margin: 0 auto 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .problem-card {
+            background: rgba(255,255,255,0.08);
+            padding: 35px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .problem-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .problem-stat {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 15px;
+        }
+
+        .problem-desc {
+            font-size: 1.2rem;
+            color: #b8b8b8;
+            line-height: 1.4;
+        }
+
+        .highlight-box {
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.15), rgba(78, 205, 196, 0.15));
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            font-size: 1.6rem;
+            font-weight: 600;
+            backdrop-filter: blur(15px);
+        }
+
+        .bullets {
+            text-align: left;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .bullet {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            padding: 25px 30px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 18px;
+            border-left: 5px solid #4ecdc4;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+        }
+
+        .bullet:hover {
+            transform: translateX(15px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .bullet strong {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .arch-layer {
+            background: rgba(255,255,255,0.08);
+            padding: 35px;
+            border-radius: 25px;
+            border: 3px solid #4ecdc4;
+            min-width: 250px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+        }
+
+        .arch-layer:hover {
+            transform: scale(1.08);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .arch-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 15px;
+        }
+
+        .market-viz {
+            display: flex;
+            justify-content: space-around;
+            margin: 50px 0;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .market-circle {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.15), rgba(78, 205, 196, 0.15));
+            border: 4px solid #4ecdc4;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(15px);
+        }
+
+        .market-circle:hover {
+            transform: scale(1.1);
+        }
+
+        .market-value {
+            font-size: 2.3rem;
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        .market-label {
+            font-size: 1.1rem;
+            color: #b8b8b8;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .financial-table {
+            width: 100%;
+            margin: 40px 0;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.05);
+            border-radius: 25px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .financial-table th,
+        .financial-table td {
+            padding: 20px 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .financial-table th {
+            background: rgba(255,255,255,0.1);
+            font-weight: 600;
+            color: #4ecdc4;
+        }
+
+        .positive { color: #4ecdc4; font-weight: 600; }
+        .negative { color: #ff6b6b; font-weight: 600; }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .timeline-item {
+            background: rgba(255,255,255,0.08);
+            padding: 30px;
+            border-radius: 25px;
+            flex: 1;
+            min-width: 280px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .timeline-year {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 20px;
+        }
+
+        .revenue-streams {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .revenue-item {
+            background: rgba(255,255,255,0.08);
+            padding: 35px;
+            border-radius: 25px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+        }
+
+        .revenue-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .revenue-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 40px 0;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.05);
+            border-radius: 25px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(255,255,255,0.1);
+            font-weight: 600;
+            color: #4ecdc4;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .team-card {
+            background: rgba(255,255,255,0.08);
+            padding: 35px;
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            text-align: left;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .team-role {
+            color: #ff6b6b;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .team-name {
+            color: #4ecdc4;
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .analogy {
+            font-style: italic;
+            color: #4ecdc4;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .cta {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            padding: 30px 60px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .cta:hover {
+            transform: translateY(-5px);
+        }
+
+        .nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 35px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            backdrop-filter: blur(20px);
+        }
+
+        @media (max-width: 768px) {
+            .slide-container { padding: 20px; }
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            .problem-grid, .revenue-streams, .team-grid { grid-template-columns: 1fr; }
+            .timeline, .architecture-diagram, .market-viz { flex-direction: column; }
+        }
+
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Cover -->
+    <div class="slide-container active">
+        <div class="slide-number">1/12</div>
+        <div class="slide fade-in">
+            <div class="logo">NOB</div>
+            <h1>NOB-AI OS</h1>
+            <div class="subtitle">The Justice-Driven AI Operating System</div>
+            <div class="tagline">Trust • Fairness • Infinite Startups</div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Problem -->
+    <div class="slide-container">
+        <div class="slide-number">2/12</div>
+        <div class="slide fade-in">
+            <h2>AI Today is Broken</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon" style="color: #ff6b6b;">⚠️</div>
+                    <div class="problem-stat">15-48%</div>
+                    <div class="problem-desc">Hallucination rates in leading LLMs create trust barriers</div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon" style="color: #f7b73d;">⚖️</div>
+                    <div class="problem-stat">Bias Crisis</div>
+                    <div class="problem-desc">Discrimination in AI systems leads to regulatory scrutiny</div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon" style="color: #45b7d1;">🔗</div>
+                    <div class="problem-stat">No Memory</div>
+                    <div class="problem-desc">Context loss limits enterprise applications</div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon" style="color: #4ecdc4;">🧩</div>
+                    <div class="problem-stat">Fragmentation</div>
+                    <div class="problem-desc">Every AI app rebuilds basic infrastructure</div>
+                </div>
+            </div>
+            <div class="highlight-box">
+                Result: Businesses avoid AI. Regulators restrict AI.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Market Pain -->
+    <div class="slide-container">
+        <div class="slide-number">3/12</div>
+        <div class="slide fade-in">
+            <h2>The £25B Compliance Crisis</h2>
+            <div class="bullets">
+                <div class="bullet">UK businesses spend <strong>£15-25B annually</strong> on compliance obligations</div>
+                <div class="bullet"><strong>63% of SMEs</strong> report being unprepared for regulatory challenges</div>
+                <div class="bullet">FCA fines jumped <strong>337% to £186M+</strong> in 2024/25</div>
+                <div class="bullet"><strong>AI governance mandates</strong> creating new compliance burdens globally</div>
+            </div>
+            <div class="highlight-box">
+                Compliance is the largest barrier to AI adoption in regulated industries
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Solution -->
+    <div class="slide-container">
+        <div class="slide-number">4/12</div>
+        <div class="slide fade-in">
+            <h2>NOB-AI OS: Justice-First Architecture</h2>
+            <div class="architecture-diagram">
+                <div class="arch-layer">
+                    <div class="arch-title">Justice Kernel</div>
+                    <p>Built-in fairness validation and explainability for every AI decision</p>
+                </div>
+                <div class="arch-layer">
+                    <div class="arch-title">Compliance Engine</div>
+                    <p>Automated regulatory reporting and audit trail generation</p>
+                </div>
+                <div class="arch-layer">
+                    <div class="arch-title">Hybrid Memory</div>
+                    <p>Persistent context for long-term enterprise workflows</p>
+                </div>
+            </div>
+            <div class="analogy">
+                "Building the iOS for trustworthy AI—where compliance is built-in, not bolted-on"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Market Opportunity -->
+    <div class="slide-container">
+        <div class="slide-number">5/12</div>
+        <div class="slide fade-in">
+            <h2>Massive Addressable Market</h2>
+            <div class="market-viz">
+                <div class="market-circle">
+                    <div class="market-value">$1.8T+</div>
+                    <div class="market-label">TAM<br>Global AI Market by 2030</div>
+                </div>
+                <div class="market-circle">
+                    <div class="market-value">$70B</div>
+                    <div class="market-label">SAM<br>RegTech + AI Governance</div>
+                </div>
+                <div class="market-circle">
+                    <div class="market-value">$3B</div>
+                    <div class="market-label">SOM<br>UK/MENA Enterprise Focus</div>
+                </div>
+            </div>
+            <div class="highlight-box">
+                Entry strategy: UK compliance market → MENA expansion → Global scale
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Business Model -->
+    <div class="slide-container">
+        <div class="slide-number">6/12</div>
+        <div class="slide fade-in">
+            <h2>Three Revenue Streams</h2>
+            <div class="revenue-streams">
+                <div class="revenue-item">
+                    <div class="revenue-number">1</div>
+                    <h3>SaaS Platform</h3>
+                    <p>£2K-15K/month per enterprise<br>Compliance automation tools</p>
+                </div>
+                <div class="revenue-item">
+                    <div class="revenue-number">2</div>
+                    <h3>Professional Services</h3>
+                    <p>£50K-200K projects<br>Custom compliance implementations</p>
+                </div>
+                <div class="revenue-item">
+                    <div class="revenue-number">3</div>
+                    <h3>Marketplace (Future)</h3>
+                    <p>20% revenue share<br>Third-party compliance tools</p>
+                </div>
+            </div>
+            <div class="highlight-box">
+                Conservative pricing model with clear unit economics and expansion revenue
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Financial Projections -->
+    <div class="slide-container">
+        <div class="slide-number">7/12</div>
+        <div class="slide fade-in">
+            <h2>Realistic Path to £15M ARR</h2>
+            <table class="financial-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Customers</th>
+                        <th>Revenue</th>
+                        <th>Expenses</th>
+                        <th>Net</th>
+                        <th>Key Milestone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2026</strong></td>
+                        <td>5</td>
+                        <td class="positive">£300K</td>
+                        <td class="negative">£800K</td>
+                        <td class="negative">-£500K</td>
+                        <td>MVP + first customers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2027</strong></td>
+                        <td>25</td>
+                        <td class="positive">£2M</td>
+                        <td class="negative">£2.5M</td>
+                        <td class="negative">-£500K</td>
+                        <td>UK market expansion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2028</strong></td>
+                        <td>60</td>
+                        <td class="positive">£6M</td>
+                        <td class="negative">£4.5M</td>
+                        <td class="positive">£1.5M</td>
+                        <td>Break-even + MENA entry</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2029</strong></td>
+                        <td>120</td>
+                        <td class="positive">£12M</td>
+                        <td class="negative">£7M</td>
+                        <td class="positive">£5M</td>
+                        <td>Series A + marketplace beta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2030</strong></td>
+                        <td>180</td>
+                        <td class="positive">£18M</td>
+                        <td class="negative">£10M</td>
+                        <td class="positive">£8M</td>
+                        <td>Global expansion ready</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="bullets">
+                <div class="bullet"><strong>Conservative assumptions:</strong> 25% annual churn, £5K average contract value, 18-month sales cycles</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Go-To-Market -->
+    <div class="slide-container">
+        <div class="slide-number">8/12</div>
+        <div class="slide fade-in">
+            <h2>Staged Geographic Expansion</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">Phase 1: Iran</div>
+                    <p><strong>R&D Foundation</strong></p>
+                    <p>Low-cost technical development</p>
+                    <p>Core team assembly</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">Phase 2: Dubai</div>
+                    <p><strong>MENA Hub</strong></p>
+                    <p>Regulatory partnerships</p>
+                    <p>First enterprise pilots</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">Phase 3: UK</div>
+                    <p><strong>Market Validation</strong></p>
+                    <p>FCA Innovation Hub</p>
+                    <p>Scale customer acquisition</p>
+                </div>
+            </div>
+            <div class="highlight-box">
+                Geographic arbitrage: Build low-cost, sell high-value, scale globally
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Competition -->
+    <div class="slide-container">
+        <div class="slide-number">9/12</div>
+        <div class="slide fade-in">
+            <h2>Competitive Positioning</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Capability</th>
+                        <th>NOB-AI OS</th>
+                        <th>Traditional RegTech</th>
+                        <th>AI Platforms</th>
+                        <th>Internal Build</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Built-in Compliance</strong></td>
+                        <td>✅ Justice Kernel</td>
+                        <td>⚠️ Rule-based only</td>
+                        <td>❌ Afterthought</td>
+                        <td>❌ Years to develop</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI-Native Design</strong></td>
+                        <td>✅ Purpose-built</td>
+                        <td>❌ Legacy systems</td>
+                        <td>⚠️ General purpose</td>
+                        <td>⚠️ Resource intensive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Speed to Market</strong></td>
+                        <td>✅ 6-12 months</td>
+                        <td>⚠️ 12-24 months</td>
+                        <td>⚠️ 18+ months</td>
+                        <td>❌ 2-5 years</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Cost</strong></td>
+                        <td>✅ £50K-200K/year</td>
+                        <td>⚠️ £100K-500K/year</td>
+                        <td>⚠️ £200K+/year</td>
+                        <td>❌ £1M+/year</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 10: Current Status -->
+    <div class="slide-container">
+        <div class="slide-number">10/12</div>
+        <div class="slide fade-in">
+            <h2>Where We Stand Today</h2>
+            <div class="bullets">
+                <div class="bullet"><strong>Technical Foundation:</strong> Core bias detection algorithms developed and tested</div>
+                <div class="bullet"><strong>Market Validation:</strong> 15+ customer discovery interviews completed in UK/MENA</div>
+                <div class="bullet"><strong>Early Traction:</strong> 3 potential customers expressing serious interest</div>
+                <div class="bullet"><strong>Regulatory Insight:</strong> Engaged with FCA Innovation Hub for partnership discussions</div>
+                <div class="bullet"><strong>Team Building:</strong> Actively recruiting UK compliance lead with RegTech experience</div>
+            </div>
+            <div class="highlight-box">
+                Moving from concept to customer: First paying pilot targeted for Q2 2025
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Team -->
+    <div class="slide-container">
+        <div class="slide-number">11/12</div>
+        <div class="slide fade-in">
+            <h2>Founding Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-role">Founder & CEO</div>
+                    <div class="team-name">Iman Hasheminejad</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;">• 20+ years IT infrastructure and network projects</li>
+                        <li style="margin-bottom: 8px;">• Led multi-million pound enterprise deployments</li>
+                        <li style="margin-bottom: 8px;">• Deep experience in system architecture and scaling</li>
+                        <li style="margin-bottom: 8px;">• Focus on ethical AI and bias prevention</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <div class="team-role">Actively Recruiting</div>
+                    <div class="team-name">Chief Compliance Officer</div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;">• Target: Former FCA or senior RegTech executive</li>
+                        <li style="margin-bottom: 8px;">• 10+ years financial services compliance</li>
+                        <li style="margin-bottom: 8px;">• UK/EU regulatory expertise essential</li>
+                        <li style="margin-bottom: 8px;">• Equity package: 5-10% for right candidate</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="analogy">
+                Technical execution + Regulatory expertise = Market success
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Investment Ask -->
+    <div class="slide-container">
+        <div class="slide-number">12/12</div>
+        <div class="slide fade-in">
+            <h2>Seed Investment: £1.5M</h2>
+            <div class="bullets">
+                <div class="bullet"><strong>Valuation:</strong> £6M pre-money (conservative for AI space)</div>
+                <div class="bullet"><strong>Use of Funds:</strong>
+                    <ul style="margin-left: 30px; margin-top: 15px; line-height: 1.6;">
+                        <li>£600K: Technical team expansion (3 engineers)</li>
+                        <li>£400K: Compliance expertise (CCO + regulatory advisors)</li>
+                        <li>£300K: Customer acquisition and sales</li>
+                        <li>£200K: Operations and 24-month runway</li>
+                    </ul>
+                </div>
+                <div class="bullet"><strong>Milestones:</strong> 5 paying customers, £300K ARR, Series A readiness</div>
+            </div>
+            <button class="cta">Build the future of trustworthy AI with NOB-AI OS</button>
+            <div class="analogy" style="margin-top: 30px;">
+                Conservative ask. Realistic projections. Clear execution plan.
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+        <button class="nav-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-container');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            const slideContent = slides[currentSlide].querySelector('.slide');
+            slideContent.classList.remove('fade-in');
+            setTimeout(() => slideContent.classList.add('fade-in'), 50);
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function previousSlide() { showSlide(currentSlide - 1); }
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault(); nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault(); previousSlide();
+            } else if (e.key === 'f' || e.key === 'F') {
+                e.preventDefault(); toggleFullscreen();
+            }
+        });
+
+        let startX = 0;
+        document.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive: true});
+        document.addEventListener('touchend', function(e) {
+            const diffX = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diffX) > 80) {
+                diffX > 0 ? nextSlide() : previousSlide();
+            }
+        }, {passive: true});
+
+        window.addEventListener('load', () => {
+            const firstSlide = document.querySelector('.slide-container.active .slide');
+            if (firstSlide) firstSlide.classList.add('fade-in');
+        });
+    </script>
+</body>
+</html>
